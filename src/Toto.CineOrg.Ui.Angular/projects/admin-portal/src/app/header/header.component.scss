@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  //border-bottom: 1px solid black ;
+}
+
+.left-part {
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.right-part-tabs {
+  display: none;
+}
+
+.right-part-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
+
+.title {
+  margin-left: 25px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+mat-icon {
+  // color: blue;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .right-part-menu {
+    display: none;
+  }
+
+  .right-part-tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 15px;
+  }
+}

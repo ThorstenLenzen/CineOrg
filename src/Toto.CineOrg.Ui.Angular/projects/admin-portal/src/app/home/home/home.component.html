@@ -1,0 +1,12 @@
+<mat-card class="mat-elevation-z6">
+  <mat-card-title>Welcome to Cine Org</mat-card-title>
+  <mat-card-subtitle>Totos awesome playground project</mat-card-subtitle>
+  <mat-card-content>Just have a look around. The source code can be found on github.</mat-card-content>
+</mat-card>
+
+<mat-card class="mat-elevation-z6">
+  <mat-card-title>Movies added last</mat-card-title>
+  <mat-card-content>
+    <p *ngFor="let movie of newMovies$ | async">{{movie.title}}</p>
+  </mat-card-content>
+</mat-card>

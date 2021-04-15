@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Toto.CineOrg.Persistence\Toto.CineOrg.Persistence.csproj" />
+      <ProjectReference Include="..\Toto.Utilities.Cqrs\Toto.Utilities.Cqrs.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="ConrollerWrapper\SingleMovieControllerQueryHandler.cs">
+        <Link>AspNetCoreHandlers\SingleMovieControllerQueryHandler.cs</Link>
+      </Compile>
+      <Compile Remove="AspNetCoreHandlers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="AspNetCoreHandlers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="AspNetCoreHandlers\**" />
+    </ItemGroup>
+
+</Project>

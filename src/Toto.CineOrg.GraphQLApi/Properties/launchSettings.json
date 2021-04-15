@@ -1,0 +1,11 @@
+﻿{
+  "Toto.CineOrg.GraphQLApi": {
+    "commandName": "Project",
+    "dotnetRunMessages": "true",
+    "launchBrowser": true,
+    "applicationUrl": "https://localhost:4998;http://localhost:4999",
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Development"
+    }
+  }
+}

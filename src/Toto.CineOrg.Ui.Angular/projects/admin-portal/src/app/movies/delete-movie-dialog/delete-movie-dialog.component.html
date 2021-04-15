@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Delete Movie</h2>
+
+<mat-dialog-content>
+  Are you sure you want to delete<br><b>{{movie.title}}</b>?
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button mat-icon-button (click)="onSuccess()"><mat-icon>done</mat-icon></button>&nbsp;
+  <button mat-icon-button (click)="onCancel()"><mat-icon>clear</mat-icon></button>
+
+</mat-dialog-actions>

@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Edit Movie</h2>
+
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="movie.title">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Genre</mat-label>
+    <mat-select [(ngModel)]="movie.genre" name="food">
+      <mat-option *ngFor="let genre of genres$ | async" [value]="genre">
+        {{genre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Year Released</mat-label>
+    <input type="number" matInput [(ngModel)]="movie.yearReleased">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="movie.description">></textarea>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button mat-icon-button (click)="onSuccess()"><mat-icon>done</mat-icon></button>&nbsp;
+  <button mat-icon-button (click)="onCancel()"><mat-icon>clear</mat-icon></button>
+
+</mat-dialog-actions>

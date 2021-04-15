@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Toto.CineOrg.DomainModel\Toto.CineOrg.DomainModel.csproj" />
+      <ProjectReference Include="..\Toto.Utilities.EntityFrameworkCore\Toto.Utilities.EntityFrameworkCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.Extensions.Logging.Console, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+        <HintPath>..\..\..\..\..\..\..\usr\local\share\dotnet\packs\Microsoft.AspNetCore.App.Ref\5.0.0\ref\net5.0\Microsoft.Extensions.Logging.Console.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>

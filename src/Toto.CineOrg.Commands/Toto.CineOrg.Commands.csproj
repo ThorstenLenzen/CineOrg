@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Toto.CineOrg.Commands</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Toto.CineOrg.Persistence\Toto.CineOrg.Persistence.csproj" />
+      <ProjectReference Include="..\Toto.CineOrg.ServiceModel\Toto.CineOrg.ServiceModel.csproj" />
+      <ProjectReference Include="..\Toto.Utilities.Cqrs.AspNetCore\Toto.Utilities.Cqrs.AspNetCore.csproj" />
+      <ProjectReference Include="..\Toto.Utilities.Exceptions\Toto.Utilities.Exceptions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="left-part">
+    <img src="assets/img/logo.png" class="logo" alt="Cine Org">
+    <div class="title">Cine Org - Admin Portal</div>
+  </div>
+
+  <div class="right-part-tabs">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link
+         *ngFor="let link of navLinks"
+         [routerLink]="link.link"
+         routerLinkActive #rla="routerLinkActive"
+         [active]="rla.isActive">
+        <mat-icon>{{link.icon}}</mat-icon>&nbsp;{{link.label}}
+      </a>
+    </nav>
+  </div>
+
+  <div class="right-part-menu">
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+              *ngFor="let link of navLinks"
+              [routerLink]="link.link">
+        <mat-icon>{{link.icon}}</mat-icon>{{link.label}}
+      </button>
+    </mat-menu>
+  </div>
+
+</div>

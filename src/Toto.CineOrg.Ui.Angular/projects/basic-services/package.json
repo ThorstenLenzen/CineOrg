@@ -1,0 +1,14 @@
+{
+  "name": "basic-services",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.0.7",
+    "@angular/core": "^9.0.7",
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "ngx-toastr": "^12.0.0",
+    "idb": "^5.0.2"
+  }
+}
