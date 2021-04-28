@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using GraphQL;
@@ -14,13 +15,13 @@ namespace Toto.CineOrg.GraphQLApi.GraphQL
 
         public CineOrgMutation(ICommandProcessor commandProcessor)
         {
-            _commandProcessor = commandProcessor;
+            _commandProcessor = commandProcessor ?? throw new ArgumentNullException(nameof(commandProcessor));
             
             FieldAsync<MovieQueryType>("createMovie", arguments: CreateMovieArguments, resolve: ResolveCreateMovie);
         }
 
-        private static QueryArguments CreateMovieArguments => new (
-          new QueryArgument<NonNullGraphType<MovieInputType>> {Name = "movie"});
+        private static QueryArguments CreateMovieArguments => 
+            new (new QueryArgument<NonNullGraphType<MovieInputType>> {Name = "movie"});
 
         private async Task<object> ResolveCreateMovie(IResolveFieldContext<object> fieldContext)
         {

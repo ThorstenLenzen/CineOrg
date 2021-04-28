@@ -17,9 +17,9 @@ namespace Toto.CineOrg.GraphQLApi.GraphQL
 
         public CineOrgQuery(IQueryProcessor queryProcessor)
         {
-            _queryProcessor = queryProcessor;
+            _queryProcessor = queryProcessor ?? throw new ArgumentNullException(nameof(queryProcessor));
             
-            FieldAsync<ListGraphType<MovieQueryType>>("movies", resolve: ResolveMoviesQueryAsync);
+            FieldAsync<ListGraphType<MovieQueryType>>("movies", arguments: MoviesQueryArguments, resolve: ResolveMoviesQueryAsync);
             FieldAsync<MovieQueryType>("movie", arguments: MovieQueryArguments, resolve: ResolveMovieQueryAsync);
             FieldAsync<ListGraphType<GenreQueryType>>("genres", resolve: ResolveGenresQueryAsync);
             FieldAsync<ListGraphType<TheatreQueryType>>("theatres", resolve: ResolveTheatresQueryAsync);
@@ -27,14 +27,20 @@ namespace Toto.CineOrg.GraphQLApi.GraphQL
         }
         
         private static QueryArguments MovieQueryArguments =>
-            new(
-                new QueryArgument<NonNullGraphType<IdGraphType>>{Name = "id"}
-            );
+            new(new QueryArgument<NonNullGraphType<IdGraphType>>{Name = "id"});
 
+        private static QueryArguments MoviesQueryArguments =>
+            new (new QueryArgument<MoviesQueryFilterType> {Name = "filter"});
+        
         private async Task<object> ResolveMoviesQueryAsync(IResolveFieldContext<object> fieldContext)
         {
+            var query = new MoviesQuery
+            {
+                Filter = fieldContext.GetArgument<MoviesQueryFilter>("filter") ?? new MoviesQueryFilter()
+            };
+            
             var movies = await _queryProcessor
-                .ProcessAsync(new MoviesQuery(), new CancellationToken());
+                .ProcessAsync(query, new CancellationToken());
 
             return movies as IList<DomainMovie>;
         }
