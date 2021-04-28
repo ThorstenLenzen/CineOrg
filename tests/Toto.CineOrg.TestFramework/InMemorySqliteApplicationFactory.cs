@@ -12,7 +12,7 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Extensions.Logging;
 using Toto.CineOrg.Persistence.Database;
-using Toto.CineOrg.WebApi.Hosting;
+using Toto.Utilities.Hosting;
 
 namespace Toto.CineOrg.TestFramework
 {

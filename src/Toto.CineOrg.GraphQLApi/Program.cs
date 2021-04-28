@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Toto.CineOrg.Persistence.Database;
-using Toto.CineOrg.WebApi.Hosting;
+using Toto.Utilities.Hosting;
 
 namespace Toto.CineOrg.GraphQLApi
 {

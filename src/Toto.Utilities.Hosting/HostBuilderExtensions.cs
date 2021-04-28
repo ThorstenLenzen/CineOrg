@@ -4,13 +4,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Toto.CineOrg.WebApi.Hosting
+namespace Toto.Utilities.Hosting
 {
     public static class HostBuilderExtensions
     {
         public static IHostBuilder AddConfiguration(this IHostBuilder hostBuilder, IConfiguration configuration)
         {
-            hostBuilder.ConfigureServices(services => { services.AddSingleton<IConfiguration>(configuration); });
+            hostBuilder.ConfigureServices(services => { services.AddSingleton(configuration); });
             return hostBuilder;
         }
         

@@ -9,6 +9,7 @@ using Serilog.Extensions.Logging;
 using Serilog.Formatting.Compact;
 using Toto.CineOrg.Persistence.Database;
 using Toto.CineOrg.WebApi.Hosting;
+using Toto.Utilities.Hosting;
 
 namespace Toto.CineOrg.WebApi
 {
