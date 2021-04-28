@@ -34,10 +34,10 @@ namespace Toto.CineOrg.Queries.Handlers
                     movieQuery = movieQuery.OrderByDescending(movie => movie.CreatedAt);
                     break;
                 case "title": 
-                    movieQuery = movieQuery.OrderBy(movie => movie.Title);
+                    movieQuery = movieQuery.OrderByDescending(movie => movie.Title);
                     break;
                 default:
-                    movieQuery = movieQuery.OrderBy(movie => movie.Title);
+                    movieQuery = movieQuery.OrderByDescending(movie => movie.Title);
                     break;
             }
             

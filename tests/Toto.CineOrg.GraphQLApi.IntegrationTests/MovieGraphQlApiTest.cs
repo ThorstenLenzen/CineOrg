@@ -10,8 +10,8 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
     public class MovieGraphQlApiTest : IClassFixture<InMemorySqliteApplicationFactory<Startup>>
     {
         private const string Query = @"
-        query AllMovies {
-            movies {
+        query AllMovies($filter: moviesQueryFilter) {
+            movies(filter: $filter) {
                 ...movieFields
             }
         },
@@ -60,7 +60,74 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
             response.Data.Movies.Should().NotBeNull();
             response.Data.Movies.Count.Should().BePositive();
         }
-        
+
+        [Fact]
+        public async Task Can_Get_All_Movies_With_OrderBy_Filter()
+        {
+            var query = new GraphQLHttpRequest
+            {
+                Query = Query,
+                OperationName = "AllMovies",
+                Variables = new 
+                { 
+                    filter = new { orderBy = "title" }
+                }
+            };
+            
+            var response = await _graphQlHttpClient.SendQueryAsync<MovieResponseCollectionType>(query);
+
+            response.Errors.Should().BeNull();
+            
+            var movieList = response.Data.Movies;
+            movieList.Should().NotBeNull();
+            movieList.Count.Should().BePositive();
+            movieList.Should().BeInDescendingOrder(mov => mov.Title);
+        }
+
+        [Fact]
+        public async Task Can_Get_All_Movies_With_Paging_Filter()
+        {
+            var query = new GraphQLHttpRequest
+            {
+                Query = Query,
+                OperationName = "AllMovies",
+                Variables = new 
+                { 
+                    filter = new { skip = 1, take = 1 }
+                }
+            };
+            
+            var response = await _graphQlHttpClient.SendQueryAsync<MovieResponseCollectionType>(query);
+
+            response.Errors.Should().BeNull();
+            
+            var movieList = response.Data.Movies;
+            movieList.Should().NotBeNull();
+            movieList.Count.Should().BePositive();
+        }
+
+        [Fact]
+        public async Task Can_Get_All_Movies_With_Paging_And_OrderBy_Filter()
+        {
+            var query = new GraphQLHttpRequest
+            {
+                Query = Query,
+                OperationName = "AllMovies",
+                Variables = new 
+                { 
+                    filter = new { orderBy = "title", skip = 0, take = 1 }
+                }
+            };
+            
+            var response = await _graphQlHttpClient.SendQueryAsync<MovieResponseCollectionType>(query);
+
+            response.Errors.Should().BeNull();
+            
+            var movieList = response.Data.Movies;
+            movieList.Should().NotBeNull();
+            movieList.Count.Should().BePositive();
+        }
+
         [Fact]
         public async Task Can_Get_Single_Movie_By_Id()
         {

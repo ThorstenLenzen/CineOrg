@@ -58,7 +58,7 @@ namespace Toto.CineOrg.WebApi.IntegrationTests
             
             var movies =  await response.Content.ToListAsync<Movie>();
             movies.Count.Should().Be(1);
-            movies[0].Title.Should().Be("Sabrina");
+            movies.Should().BeInDescendingOrder();
         }
         
         [Fact]
