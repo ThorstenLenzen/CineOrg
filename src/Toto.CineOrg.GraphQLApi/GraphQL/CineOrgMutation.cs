@@ -18,14 +18,25 @@ namespace Toto.CineOrg.GraphQLApi.GraphQL
             _commandProcessor = commandProcessor ?? throw new ArgumentNullException(nameof(commandProcessor));
             
             FieldAsync<MovieQueryType>("createMovie", arguments: CreateMovieArguments, resolve: ResolveCreateMovie);
+            FieldAsync<MovieQueryType>("updateMovie", arguments: UpdateMovieArguments, resolve: ResolveUpdateMovie);
         }
 
         private static QueryArguments CreateMovieArguments => 
-            new (new QueryArgument<NonNullGraphType<MovieInputType>> {Name = "movie"});
+            new (new QueryArgument<NonNullGraphType<MovieCreateInputType>> {Name = "movie"});
+        
+        private static QueryArguments UpdateMovieArguments => 
+            new (new QueryArgument<NonNullGraphType<MovieUpdateInputType>> {Name = "movie"});
 
         private async Task<object> ResolveCreateMovie(IResolveFieldContext<object> fieldContext)
         {
             var command = fieldContext.GetArgument<CreateMovieCommand>("movie");
+            var domainMovie = await _commandProcessor.ProcessAsync(command, new CancellationToken());
+            return domainMovie;
+        }
+        
+        private async Task<object> ResolveUpdateMovie(IResolveFieldContext<object> fieldContext)
+        {
+            var command = fieldContext.GetArgument<UpdateMovieCommand>("movie"); 
             var domainMovie = await _commandProcessor.ProcessAsync(command, new CancellationToken());
             return domainMovie;
         }

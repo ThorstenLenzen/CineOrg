@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Toto.CineOrg.GraphQLApi.IntegrationTests
 {
-    public class TheatresAndSeatsGraphQlApiTest : IClassFixture<InMemorySqliteApplicationFactory<Startup>>
+    public class TheatresAndSeatsQueryTest : IClassFixture<InMemorySqliteApplicationFactory<Startup>>
     {
         private const string Query = @"
         query AllTheatres {
@@ -34,7 +34,7 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
         
         private readonly GraphQLHttpClient _graphQlHttpClient;
         
-        public TheatresAndSeatsGraphQlApiTest(InMemorySqliteApplicationFactory<Startup> factory)
+        public TheatresAndSeatsQueryTest(InMemorySqliteApplicationFactory<Startup> factory)
         {
             _graphQlHttpClient = factory.CreateGraphQlHttpClient();
         }

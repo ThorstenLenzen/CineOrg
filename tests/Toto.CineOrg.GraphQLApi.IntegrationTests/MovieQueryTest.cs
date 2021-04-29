@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Toto.CineOrg.GraphQLApi.IntegrationTests
 {
-    public class MovieGraphQlApiTest : IClassFixture<InMemorySqliteApplicationFactory<Startup>>
+    public class MovieQueryTest : IClassFixture<InMemorySqliteApplicationFactory<Startup>>
     {
         private const string Query = @"
         query AllMovies($filter: moviesQueryFilter) {
@@ -20,15 +20,6 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
                 ...movieFields
             }
         },
-        mutation CreateMovie($movie: movieInput!) {
-	        createMovie(movie: $movie) {
-                id,
-                title,
-                description,
-                yearReleased,
-                genre
-          }    
-        }
         fragment movieFields on MovieQueryType {
             id,
             title,
@@ -40,7 +31,7 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
         
         private readonly GraphQLHttpClient _graphQlHttpClient;
         
-        public MovieGraphQlApiTest(InMemorySqliteApplicationFactory<Startup> factory)
+        public MovieQueryTest(InMemorySqliteApplicationFactory<Startup> factory)
         {
             _graphQlHttpClient = factory.CreateGraphQlHttpClient();
         }
@@ -142,35 +133,6 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
 
             response.Errors.Should().BeNull();
             response.Data.Movie.Should().NotBeNull();
-        }
-        
-        [Fact]
-        public async Task Can_Create_New_Movie()
-        {
-            var query = new GraphQLHttpRequest
-            {
-                Query = Query,
-                OperationName = "CreateMovie",
-                Variables = new 
-                { 
-                    movie = new 
-                    {
-                        title = "Blade Runner",
-                        description = "A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator",
-                        yearReleased = 1982,
-                        genre = "scifi"
-                    }
-                }
-            };
-            
-            var response = await _graphQlHttpClient.SendMutationAsync<MovieResponseType>(query);
-
-            response.Errors.Should().BeNull();
-            
-            // Does not work. For unknown reasons Movie is null.
-            // It works in the Playground, though.
-            // So it must be a client problem.
-            // response.Data.Movie.Should().NotBeNull();
         }
     }
 }

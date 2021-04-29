@@ -2,12 +2,13 @@ using GraphQL.Types;
 
 namespace Toto.CineOrg.GraphQLApi.GraphQL.Types
 {
-    public class MovieInputType : InputObjectGraphType
+    public class MovieUpdateInputType : InputObjectGraphType
     {
-        public MovieInputType()
+        public MovieUpdateInputType()
         {
-            Name = "movieInput";
+            Name = "movieUpdateInput";
             
+            Field<NonNullGraphType<IdGraphType>>("id");
             Field<NonNullGraphType<StringGraphType>>("title");
             Field<StringGraphType>("description");
             Field<NonNullGraphType<IntGraphType>>("yearReleased");

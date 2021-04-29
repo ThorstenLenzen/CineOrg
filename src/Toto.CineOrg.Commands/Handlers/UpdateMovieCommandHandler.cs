@@ -43,7 +43,7 @@ namespace Toto.CineOrg.Commands.Handlers
             
             _logger.LogDebug($"{GetType().Name} leaving.");
 
-            return null;
+            return domainMovie;
         }
     }
 }
