@@ -58,6 +58,7 @@ namespace Toto.CineOrg.Hosting
             services.AddTransient<IQueryHandler<GenresQuery>, GenresQueryHandler>();
             services.AddTransient<IQueryHandler<TheatresQuery>, TheatresQueryHandler>();
             services.AddTransient<IQueryHandler<SeatsQuery>, SeatsQueryHandler>();
+            services.AddTransient<IQueryHandler<SeatCategoriesQuery>, SeatCategoriesQueryHandler>();
 
             return services;
         }

@@ -22,10 +22,11 @@ namespace Toto.CineOrg.GraphQLApi.GraphQL
             FieldAsync<ListGraphType<MovieQueryType>>("movies", arguments: MoviesQueryArguments, resolve: ResolveMoviesQueryAsync);
             FieldAsync<MovieQueryType>("movie", arguments: MovieQueryArguments, resolve: ResolveMovieQueryAsync);
             FieldAsync<ListGraphType<GenreQueryType>>("genres", resolve: ResolveGenresQueryAsync);
+            FieldAsync<ListGraphType<SeatCategoryQueryType>>("seatCategories", resolve: ResolveSeatCategoriesQueryAsync);
             FieldAsync<ListGraphType<TheatreQueryType>>("theatres", resolve: ResolveTheatresQueryAsync);
             FieldAsync<ListGraphType<SeatQueryType>>("seats", resolve: ResolveSeatsQueryAsync);
         }
-        
+
         private static QueryArguments MovieQueryArguments =>
             new(new QueryArgument<NonNullGraphType<IdGraphType>>{Name = "id"});
 
@@ -63,6 +64,14 @@ namespace Toto.CineOrg.GraphQLApi.GraphQL
                 .ProcessAsync(new GenresQuery(), new CancellationToken());
 
             return genreNames as List<string>;
+        }
+        
+        private async Task<object> ResolveSeatCategoriesQueryAsync(IResolveFieldContext<object> arg)
+        {
+            var categoryNames = await _queryProcessor
+                .ProcessAsync(new SeatCategoriesQuery(), new CancellationToken());
+
+            return categoryNames as List<string>;
         }
         
         private async Task<object> ResolveTheatresQueryAsync(IResolveFieldContext<object> fieldContext)
