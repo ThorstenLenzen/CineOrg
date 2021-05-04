@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="10.0.4" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Toto.CineOrg.Persistence\Toto.CineOrg.Persistence.csproj" />
     </ItemGroup>
 
