@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="10.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Toto.CineOrg.Commands\Toto.CineOrg.Commands.csproj" />
+      <ProjectReference Include="..\Toto.CineOrg.Queries\Toto.CineOrg.Queries.csproj" />
+    </ItemGroup>
+
+</Project>

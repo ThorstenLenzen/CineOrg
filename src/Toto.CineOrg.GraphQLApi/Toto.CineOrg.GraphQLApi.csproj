@@ -19,8 +19,4 @@
       <ProjectReference Include="..\Toto.Utilities.Hosting\Toto.Utilities.Hosting.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Validation" />
-    </ItemGroup>
-
 </Project>
