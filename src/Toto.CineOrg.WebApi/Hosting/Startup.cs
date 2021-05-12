@@ -37,8 +37,8 @@ namespace Toto.CineOrg.WebApi.Hosting
 
             services.AddFluentValidators();
             services.AddCqrsInfrastructure();
-            services.AddCommandHandlers();
-            services.AddQueryHandlers();
+            services.AddCommands();
+            services.AddQueries();
             services.AddControllerQueries();
             services.AddControllerCommands();
 

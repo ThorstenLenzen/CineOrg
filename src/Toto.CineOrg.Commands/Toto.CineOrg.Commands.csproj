@@ -8,8 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Toto.CineOrg.Persistence\Toto.CineOrg.Persistence.csproj" />
-      <ProjectReference Include="..\Toto.CineOrg.ServiceModel\Toto.CineOrg.ServiceModel.csproj" />
-      <ProjectReference Include="..\Toto.Utilities.Cqrs.AspNetCore\Toto.Utilities.Cqrs.AspNetCore.csproj" />
+      <ProjectReference Include="..\Toto.Utilities.Cqrs\Toto.Utilities.Cqrs.csproj" />
       <ProjectReference Include="..\Toto.Utilities.Exceptions\Toto.Utilities.Exceptions.csproj" />
     </ItemGroup>
 

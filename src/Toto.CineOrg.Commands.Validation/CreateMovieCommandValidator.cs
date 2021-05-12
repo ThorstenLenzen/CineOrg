@@ -4,12 +4,11 @@ using System.Threading.Tasks;
 using FluentValidation;
 using Toto.CineOrg.DomainModel;
 using Toto.CineOrg.Queries;
-using Toto.CineOrg.ServiceModel;
 using Toto.Utilities.Cqrs.Queries;
 
 namespace Toto.CineOrg.Commands.Validation
 {
-    public class CreateMovieCommandValidator : AbstractValidator<MovieForCreate>
+    public class CreateMovieCommandValidator : AbstractValidator<CreateMovieCommand>
     {
         private readonly IQueryProcessor _processor;
 

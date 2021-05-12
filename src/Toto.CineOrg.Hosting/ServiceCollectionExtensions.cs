@@ -1,7 +1,8 @@
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Toto.CineOrg.Commands;
-using Toto.CineOrg.Commands.Converters;
 using Toto.CineOrg.Commands.Handlers;
+using Toto.CineOrg.Commands.Validation;
 using Toto.CineOrg.DomainModel;
 using Toto.CineOrg.Queries;
 using Toto.CineOrg.Queries.Handlers;
@@ -26,11 +27,16 @@ namespace Toto.CineOrg.Hosting
             return services;
         }
         
-        public static IServiceCollection AddCommandHandlers(this IServiceCollection services)
+        public static IServiceCollection AddCommands(this IServiceCollection services)
         {
+            // Commands
             services.AddTransient<ICommandHandler<DeleteMovieCommand>, DeleteMovieCommandHandler>();
             services.AddTransient<ICommandHandler<UpdateMovieCommand>, UpdateMovieCommandHandler>();
             services.AddTransient<ICommandHandler<CreateMovieCommand>, CreateMovieCommandHandler>();
+            
+            // Validators
+            services.AddTransient<IValidator<CreateMovieCommand>, CreateMovieCommandValidator>();
+            services.AddTransient<IValidator<UpdateMovieCommand>, UpdateMovieCommandValidator>();
 
             return services;
         }
@@ -50,7 +56,7 @@ namespace Toto.CineOrg.Hosting
             return services;
         }
         
-        public static IServiceCollection AddQueryHandlers(this IServiceCollection services)
+        public static IServiceCollection AddQueries(this IServiceCollection services)
         {
             services.AddTransient<IQueryHandler<MovieQuery>, MovieQueryHandler>();
             services.AddTransient<IQueryHandler<MoviesQuery>, MoviesQueryHandler>();

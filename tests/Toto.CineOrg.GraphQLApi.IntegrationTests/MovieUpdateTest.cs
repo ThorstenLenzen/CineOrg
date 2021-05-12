@@ -72,7 +72,7 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
                     {
                         Id = new Guid("20DB69D0-7760-4C3F-A484-032423E61023"),
                         Title = "...",
-                        Description = "..",
+                        Description = "...",
                         Genre = "romance",
                         YearReleased = 1995,
                     }
@@ -82,11 +82,31 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
             var response = await _graphQlHttpClient.SendMutationAsync<MovieResponseType>(query);
             
             response.Errors.Should().NotBeNull();
+        }
+        
+        [Fact]
+        public async Task Can_Not_Update_Movie_With_Future_Release_Date()
+        {
+            var query = new GraphQLHttpRequest
+            {
+                Query = Query,
+                OperationName = "UpdateMovie",
+                Variables = new 
+                { 
+                    movie = new 
+                    {
+                        Id = new Guid("20DB69D0-7760-4C3F-A484-032423E61018"),
+                        Title = "...",
+                        Description = "...",
+                        Genre = "romance",
+                        YearReleased = DateTime.UtcNow.Year + 3,
+                    }
+                }
+            };
             
-            // Does not work. For unknown reasons Movie is null.
-            // It works in the Playground, though.
-            // So it must be a client problem.
-            // response.Data.Movie.Should().NotBeNull();
+            var response = await _graphQlHttpClient.SendMutationAsync<MovieResponseType>(query);
+            
+            response.Errors.Should().NotBeNull();
         }
     }
 }

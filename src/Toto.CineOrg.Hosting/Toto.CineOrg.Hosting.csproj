@@ -5,12 +5,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="10.1.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Toto.CineOrg.Commands.Validation\Toto.CineOrg.Commands.Validation.csproj" />
       <ProjectReference Include="..\Toto.CineOrg.Commands\Toto.CineOrg.Commands.csproj" />
       <ProjectReference Include="..\Toto.CineOrg.Queries\Toto.CineOrg.Queries.csproj" />
+      <ProjectReference Include="..\Toto.CineOrg.ServiceModel\Toto.CineOrg.ServiceModel.csproj" />
       <ProjectReference Include="..\Toto.Utilities.Cqrs.AspNetCore\Toto.Utilities.Cqrs.AspNetCore.csproj" />
     </ItemGroup>
 

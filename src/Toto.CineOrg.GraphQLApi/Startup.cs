@@ -14,8 +14,8 @@ namespace Toto.CineOrg.GraphQLApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCqrsInfrastructure();
-            services.AddCommandHandlers();
-            services.AddQueryHandlers();
+            services.AddCommands();
+            services.AddQueries();
             
             services.AddScoped<QueryCineOrgContext>();
             

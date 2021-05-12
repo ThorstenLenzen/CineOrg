@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using GraphQL.Client.Http;
@@ -55,6 +56,30 @@ namespace Toto.CineOrg.GraphQLApi.IntegrationTests
             // It works in the Playground, though.
             // So it must be a client problem.
             // response.Data.Movie.Should().NotBeNull();
+        }
+        
+        [Fact]
+        public async Task Can_Not_Create_Movie_With_Future_Release_Date()
+        {
+            var query = new GraphQLHttpRequest
+            {
+                Query = Query,
+                OperationName = "CreateMovie",
+                Variables = new 
+                { 
+                    movie = new 
+                    {
+                        Title = "...",
+                        Description = "...",
+                        Genre = "romance",
+                        YearReleased = DateTime.UtcNow.Year + 3,
+                    }
+                }
+            };
+            
+            var response = await _graphQlHttpClient.SendMutationAsync<MovieResponseType>(query);
+            
+            response.Errors.Should().NotBeNull();
         }
     }
 }

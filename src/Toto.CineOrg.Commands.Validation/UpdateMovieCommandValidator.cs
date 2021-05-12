@@ -1,11 +1,10 @@
 using System;
 using FluentValidation;
 using Toto.CineOrg.DomainModel;
-using Toto.CineOrg.ServiceModel;
 
 namespace Toto.CineOrg.Commands.Validation
 {
-    public class UpdateMovieCommandValidator : AbstractValidator<MovieForUpdate>
+    public class UpdateMovieCommandValidator : AbstractValidator<UpdateMovieCommand>
     {
         public const int MaximumTitleLength = 100;
         
