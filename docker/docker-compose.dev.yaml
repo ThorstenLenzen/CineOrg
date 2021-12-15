@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  sql2019:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    env_file:
+      - sqlserver.env
+      - sapassword.env  
+    ports:
+      - "1433:1433"
+    networks:
+      - cineorg_net
+    volumes:
+      - sqlsystem:/var/opt/mssql
+      - sqldata:/var/opt/sqlserver/data
+      - sqllog:/var/opt/sqlserver/log
+      - sqlbackup:/var/opt/sqlserver/backup
+
+  seq:
+    image: "datalust/seq:latest"
+    env_file: 
+      - seq.env
+    ports:
+      - "1081:80"
+      - "5341:5341"
+    networks:
+      - cineorg_net
+    volumes:
+      - seqdata:/data
+
+  maildev:
+    image: maildev/maildev
+    ports:
+    - "1080:80"
+    - "1025:25"
+    networks:
+      - cineorg_net
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - rabbitmqdata:/var/lib/rabbitmq
+        - rabbitmqlog:/var/log/rabbitmq
+    networks:
+        - cineorg_net
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - cineorg_net
+
+volumes:
+  sqlsystem:
+  sqldata:
+  sqllog:
+  sqlbackup:
+  seqdata:
+  rabbitmqlog:
+  rabbitmqdata:
+
+networks:
+  cineorg_net:
